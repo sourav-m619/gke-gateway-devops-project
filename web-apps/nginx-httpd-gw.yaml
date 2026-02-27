@@ -1,0 +1,36 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: web-apps-route
+  namespace: deploy
+spec:
+  parentRefs:
+  - name: external-http
+    namespace: default
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /nginx
+    filters: # This tells the LB to change the URL before sending it to the pod
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
+    backendRefs:
+    - name: nginx-service
+      port: 80
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /httpd
+    filters: # Same for the httpd service
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
+    backendRefs:
+    - name: httpd-service
+      port: 80

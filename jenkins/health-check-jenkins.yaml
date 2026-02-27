@@ -1,0 +1,20 @@
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: jenkins-healthcheck
+  namespace: jenkins
+spec:
+  targetRef:
+    group: ""
+    kind: Service
+    name: my-jenkins
+  default:
+    checkIntervalSec: 5
+    timeoutSec: 5
+    healthyThreshold: 1
+    unhealthyThreshold: 3
+    config:
+      type: HTTP
+      httpHealthCheck:
+        port: 8080
+        requestPath: /jenkins/login

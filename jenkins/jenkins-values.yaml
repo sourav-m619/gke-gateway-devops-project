@@ -1,0 +1,11 @@
+controller:
+  jenkinsUriPrefix: "/jenkins"
+
+controller:
+  jenkinsUriPrefix: "/jenkins"
+  healthProbes: true
+  readinessProbe:
+    httpGet:
+      path: "/jenkins/login" # Checking the login page is a reliable health check
+      port: 8080
+    initialDelaySeconds: 60 # Give Jenkins time to start
