@@ -2,6 +2,9 @@
 
 ## 📌 Overview
 
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/60f911c3-8644-4028-a10e-556921f231f9" />
+
+
 This project demonstrates a production-style deployment of stateless and stateful applications on Google Kubernetes Engine (GKE), exposed externally using the Kubernetes Gateway API with a reserved static public IP.
 
 The implementation includes:
